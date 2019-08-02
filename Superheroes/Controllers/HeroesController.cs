@@ -1,4 +1,5 @@
-﻿using Superheroes.Models;
+﻿using Microsoft.AspNet.Identity;
+using Superheroes.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,14 +18,18 @@ namespace Superheroes.Controllers
         // GET: Heroes
         public ActionResult Index()
         {
-            return View();
+            string currentUserId = User.Identity.GetUserId();
+            return View(context.Heroes.ToList());
         }
 
+
         // GET: Heroes/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int ID)
         {
-            return View();
+            var hero = context.Heroes.Where(h => h.ID == ID).First();
+            return View(hero);
         }
+    
 
         // GET: Heroes/Create
         public ActionResult Create()
@@ -51,9 +56,10 @@ namespace Superheroes.Controllers
         }
 
         // GET: Heroes/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int ID)
         {
-            return View();
+            var hero = context.Heroes.Where(h => h.ID == ID).First();
+            return View(hero);
         }
 
         // POST: Heroes/Edit/5
@@ -88,7 +94,7 @@ namespace Superheroes.Controllers
 
         // POST: Heroes/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int ID, FormCollection collection)
         {
             try
             {
@@ -100,6 +106,12 @@ namespace Superheroes.Controllers
             {
                 return View();
             }
+        }
+
+        [HttpPost]
+        public ActionResult Details([Bind(Include = "")]Hero hero)
+        {
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
