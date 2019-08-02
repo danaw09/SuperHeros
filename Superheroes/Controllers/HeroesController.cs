@@ -10,23 +10,23 @@ namespace Superheroes.Controllers
 {
     public class HeroesController : Controller
     {
-        ApplicationDbContext context;
+        ApplicationDbContext db;
         public HeroesController()
         {
-            context = new ApplicationDbContext();
+            db = new ApplicationDbContext();
         }
         // GET: Heroes
         public ActionResult Index()
         {
             string currentUserId = User.Identity.GetUserId();
-            return View(context.Heroes.ToList());
+            return View(db.Heroes.ToList());
         }
 
 
         // GET: Heroes/Details/5
         public ActionResult Details(int ID)
         {
-            var hero = context.Heroes.Where(h => h.ID == ID).First();
+            var hero = db.Heroes.Where(h => h.ID == ID).First();
             return View(hero);
         }
     
@@ -45,8 +45,8 @@ namespace Superheroes.Controllers
             try
             {
                 // TODO: Add insert logic here
-                context.Heroes.Add(hero);
-                context.SaveChanges();
+                db.Heroes.Add(hero);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
@@ -58,7 +58,7 @@ namespace Superheroes.Controllers
         // GET: Heroes/Edit/5
         public ActionResult Edit(int ID)
         {
-            var hero = context.Heroes.Where(h => h.ID == ID).First();
+            var hero = db.Heroes.Where(h => h.ID == ID).First();
             return View(hero);
         }
 
@@ -84,9 +84,9 @@ namespace Superheroes.Controllers
 
             if (ModelState.IsValid)
             {
-                var deleteHero = context.Heroes.Where(h => hero.ID.Equals(hero.ID)).First();
-                context.Heroes.Remove(deleteHero);
-                context.SaveChanges();
+                var deleteHero = db.Heroes.Where(h => hero.ID.Equals(hero.ID)).First();
+                db.Heroes.Remove(deleteHero);
+               db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(hero);
@@ -117,13 +117,13 @@ namespace Superheroes.Controllers
         [HttpPost]
         public ActionResult Edit([Bind(Include = "ID, Name, AlterEgo, PrimaryAbility, SecondaryAbility, CatchPhrase")] Hero hero)
         {
-            var updatedHero = context.Heroes.Where(h => h.ID == hero.ID).FirstOrDefault();
+            var updatedHero = db.Heroes.Where(h => h.ID == hero.ID).FirstOrDefault();
             updatedHero.Name = hero.Name;
             updatedHero.AlterEgo = hero.AlterEgo;
             updatedHero.PrimaryAbility = hero.PrimaryAbility;
             updatedHero.SecondaryAbility = hero.SecondaryAbility;
             updatedHero.CatchPhrase = hero.CatchPhrase;
-            context.SaveChanges();
+            db.SaveChanges();
             return RedirectToAction("Index");
 
         }
