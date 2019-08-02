@@ -73,7 +73,7 @@ namespace Superheroes.Controllers
         }
 
         // GET: Heroes/Delete/5
-        public ActionResult Delete(Hero hero)
+        public ActionResult Delete(Hero hero )
         {
 
             if (ModelState.IsValid)
@@ -100,6 +100,20 @@ namespace Superheroes.Controllers
             {
                 return View();
             }
+        }
+
+        [HttpPost]
+        public ActionResult Edit([Bind(Include = "ID, Name, AlterEgo, PrimaryAbility, SecondaryAbility, CatchPhrase")] Hero hero)
+        {
+            var updatedHero = context.Heroes.Where(h => h.ID == hero.ID).FirstOrDefault();
+            updatedHero.Name = hero.Name;
+            updatedHero.AlterEgo = hero.AlterEgo;
+            updatedHero.PrimaryAbility = hero.PrimaryAbility;
+            updatedHero.SecondaryAbility = hero.SecondaryAbility;
+            updatedHero.CatchPhrase = hero.CatchPhrase;
+            context.SaveChanges();
+            return RedirectToAction("Index");
+
         }
     }
 }
