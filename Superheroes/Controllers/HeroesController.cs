@@ -30,7 +30,7 @@ namespace Superheroes.Controllers
 
         // POST: Heroes/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Hero hero)
         {
             try
             {
