@@ -73,10 +73,19 @@ namespace Superheroes.Controllers
         }
 
         // GET: Heroes/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Hero hero)
         {
-            return View();
+
+            if (ModelState.IsValid)
+            {
+                var deleteHero = context.Heroes.Where(h => hero.ID.Equals(hero.ID)).First();
+                context.Heroes.Remove(deleteHero);
+                context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(hero);
         }
+    }
 
         // POST: Heroes/Delete/5
         [HttpPost]
