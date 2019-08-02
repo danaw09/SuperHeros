@@ -85,7 +85,6 @@ namespace Superheroes.Controllers
             }
             return View(hero);
         }
-    }
 
         // POST: Heroes/Delete/5
         [HttpPost]
