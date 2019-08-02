@@ -9,6 +9,11 @@ namespace Superheroes.Controllers
 {
     public class HeroesController : Controller
     {
+        ApplicationDbContext context;
+        public HeroesController()
+        {
+            context = new ApplicationDbContext();
+        }
         // GET: Heroes
         public ActionResult Index()
         {
@@ -35,7 +40,8 @@ namespace Superheroes.Controllers
             try
             {
                 // TODO: Add insert logic here
-
+                context.Heroes.Add(hero);
+                context.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
