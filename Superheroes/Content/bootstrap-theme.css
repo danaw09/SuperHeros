@@ -102,7 +102,7 @@ fieldset[disabled] .btn-default:active,
 .btn-default[disabled].active,
 fieldset[disabled] .btn-default.active {
   background-color: #e0e0e0;
-  background-image: none;
+  background-image:url('Images/Capture.PNG')
 }
 .btn-primary {
   background-image: -webkit-linear-gradient(top, #337ab7 0%, #265a88 100%);
