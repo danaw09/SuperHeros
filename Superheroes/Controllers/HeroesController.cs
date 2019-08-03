@@ -62,21 +62,7 @@ namespace Superheroes.Controllers
             return View(hero);
         }
 
-        // POST: Heroes/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+       
 
         // GET: Heroes/Delete/5
         public ActionResult Delete(Hero hero )
@@ -92,22 +78,9 @@ namespace Superheroes.Controllers
             return View(hero);
         }
 
-        // POST: Heroes/Delete/5
+       
 
-        [HttpPost]
-        public ActionResult Delete(int ID, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+  
 
         [HttpPost]
         public ActionResult Details([Bind(Include = "")]Hero hero)
