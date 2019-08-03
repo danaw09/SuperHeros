@@ -40,7 +40,7 @@ namespace Superheroes.Controllers
 
         // POST: Heroes/Create
         [HttpPost]
-        public ActionResult Create(Hero hero)
+        public ActionResult Create([Bind(Include = "ID, Name, AlterEgo, PrimaryAbility, SecondaryAbility, CatchPhrase")] Hero hero) 
         {
             try
             {
@@ -93,6 +93,7 @@ namespace Superheroes.Controllers
         }
 
         // POST: Heroes/Delete/5
+
         [HttpPost]
         public ActionResult Delete(int ID, FormCollection collection)
         {
